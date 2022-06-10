@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .d-flex {
+        display: flex;
+      }
+      .justify-center {
+        justify-content: center;
+      }
+      .flex-col {
+        flex-direction: column;
+      }
+      .align-center {
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="d-flex flex-col align-center">
+      <label for="task">
+        <h1>Welcome to Ask.Net</h1>
+      </label>
+
+      <input placeholder="Enter your questions here..." type="text" id="task" />
+    </form>
+
+    <section class="img-container">
+      <article id="img-article"></article>
+
+      <h1 id="answer-text"></h1>
+    </section>
+
+    <script>
+      {
+        const wtfUrl = "https://yesno.wtf/assets/yes/2.gif";
+
+        const imgArticle = document.getElementById("img-article");
+
+        const ansText = document.getElementById("answer-text");
+
+        //when the user types in a question in the input and hits enter
+
+        //we then call the api
+
+        //...once the request is completed, then we will display the result in 'img-article' and the text element, i.e. 'answer-text'
+
+        document.querySelector("form").addEventListener("submit", decide); // We add an EventListener to the form element. We'll listen to the submit event, then we'll create an event handler, called 'decide'
+
+        function decide(event) {
+          event.preventDefault(); //this stops the page from refreshing from a submit event
+
+          //remember to call an api, we always use the 'fetch' command.
+
+          fetch(wtfUrl, {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+            },
+          }).then(async (response) => {
+            //in a 'then' function, we will retrieve our API response.
+            const result = await response.json();
+
+            const img = document.createElement("img");
+
+            img.setAttribute("src", result.image);
+
+            imgArticle.appendChild(img);
+
+            ansText.textContent = result.answer;
+          });
+        }
+      }
+    </script>
+  </body>
+</html>
