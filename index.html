@@ -57,10 +57,12 @@
 
           //remember to call an api, we always use the 'fetch' command.
 
-          fetch(wtfUrl, {
+ fetch(wtfUrl, {
             method: "GET",
             headers: {
               accept: "application/json",
+              Content-Type: "application/json",
+              Access-Control-Allow-Origin: "*"
             },
           }).then(async (response) => {
             //in a 'then' function, we will retrieve our API response.
